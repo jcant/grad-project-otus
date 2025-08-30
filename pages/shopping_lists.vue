@@ -1,15 +1,13 @@
 <script setup lang="ts">
-//import type { User } from "../misc/types";
-
 import { serverApi } from "~/misc/constants";
 
-const users = ref({});
-users.value = await useFetch(serverApi.GET_ALL_USERS);
+const shoppingLists = ref({});
+shoppingLists.value = await useFetch(serverApi.GET_ALL_SHOPPING_LISTS);
 </script>
 <template>
   <div>
     <h1>Users Page</h1>
-    <div>{{ users }}</div>
+    <div>{{ shoppingLists }}</div>
   </div>
 </template>
 <style scoped>
