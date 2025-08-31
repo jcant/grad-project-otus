@@ -9,9 +9,7 @@ const props = defineProps<UserLabelProps>();
 </script>
 
 <template>
-  <Badge color="green-100" font-size="6" padding="2" margin="2">{{
-    user.name
-  }}</Badge>
+  <v-chip class="cursor-pointer">{{ user.name }}</v-chip>
 </template>
 
 <style scoped></style>

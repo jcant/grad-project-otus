@@ -13,7 +13,7 @@ onBeforeMount(async () => {
   <div>
     <div>List of Users</div>
     <div v-for="user in users">
-      <UserLabel :user="user" class="pointer"></UserLabel>
+      <UserLabel :user="user"></UserLabel>
     </div>
   </div>
 </template>

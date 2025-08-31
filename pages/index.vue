@@ -1,19 +1,17 @@
-<script setup lang="ts">
-import { UserList } from "#components";
-import { getUsers } from "~/components/data/api";
-import type { User } from "~/misc/types";
-
-const users = ref<User[]>();
-
-onBeforeMount(async () => {
-  users.value = await getUsers();
-});
-</script>
+<script setup lang="ts"></script>
 <template>
-  <UserList></UserList>
+  <v-container>
+    <v-row justify="center">
+      <div class="text-center w-100 text-h4 mb-3 text-amber">
+        Please authenticate
+      </div>
+      <auth-authenticate></auth-authenticate>
+      <div class="text-center w-100 text-h4 mb-3 mt-3">Or</div>
+      <div class="text-center w-100 text-h4 mb-3 text-amber">
+        Please register
+      </div>
+      <auth-register></auth-register>
+    </v-row>
+  </v-container>
 </template>
-<style scoped>
-h1 {
-  color: red;
-}
-</style>
+<style scoped></style>
