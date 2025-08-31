@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { useAuthStore } from "~/store/auth_store";
 
 const username = ref("");
 const password = ref("");
@@ -10,6 +11,18 @@ const rules = {
   min: (value: string) => value.length >= 8 || "Min 8 characters",
   // emailMatch: () => `The email and password you entered don't match`,
 };
+
+const authStore = useAuthStore();
+
+async function authenticate() {
+  console.log(
+    "in authenticate() username=",
+    username.value,
+    " password=",
+    password.value
+  );
+  await authStore.login(username.value, password.value);
+}
 </script>
 <template>
   <v-container>
@@ -33,7 +46,9 @@ const rules = {
             counter
             @click:append="showPassword = !showPassword"
           ></v-text-field>
-          <v-btn class="mt-2" type="submit" block>Authenticate</v-btn>
+          <v-btn class="mt-2" type="submit" block @click="authenticate"
+            >Authenticate</v-btn
+          >
         </v-form>
       </v-col>
     </v-row>
