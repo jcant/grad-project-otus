@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { UserList } from "#components";
+import { UserLabel } from "#components";
 import { getUsers } from "~/components/data/api";
 import type { User } from "~/misc/types";
 
@@ -10,10 +10,15 @@ onBeforeMount(async () => {
 });
 </script>
 <template>
-  <UserList></UserList>
+  <div>
+    <div>List of Users</div>
+    <div v-for="user in users">
+      <UserLabel :user="user" class="pointer"></UserLabel>
+    </div>
+  </div>
 </template>
-<style scoped>
-h1 {
-  color: red;
+<style>
+.pointer {
+  cursor: pointer;
 }
 </style>
