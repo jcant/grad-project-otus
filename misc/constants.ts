@@ -6,4 +6,10 @@ export const serverApi = {
   TEST: "/api/test",
 };
 
-export default { serverApi };
+export const pages = {
+  HOME: "/",
+  SHOPPING_LISTS: "/shopping_lists",
+  USERS: "/users",
+};
+
+export default { serverApi, pages };

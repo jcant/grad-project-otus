@@ -1,4 +1,4 @@
-import { getShoppingListById } from "../../data/get_shopping_lists";
+import { getShoppingListById } from "../../data/get_shoplists_sqlite";
 
 export default defineEventHandler((event) => {
   const shoppingListId = getRouterParam(event, "id");

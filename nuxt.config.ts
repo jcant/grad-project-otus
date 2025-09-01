@@ -15,7 +15,6 @@ export default defineNuxtConfig({
 
   modules: [
     "@pinia/nuxt",
-    "usebootstrap",
     (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {
         // @ts-expect-error
@@ -43,5 +42,14 @@ export default defineNuxtConfig({
         },
       }),
     ],
+  },
+  nitro: {
+    plugins: [
+      "plugins/init_users_sqlite.ts",
+      "plugins/init_shoplists_sqlite.ts",
+    ],
+    experimental: {
+      database: true,
+    },
   },
 });

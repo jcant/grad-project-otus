@@ -1,4 +1,4 @@
-import { getUserById } from "../../data/get_users";
+import { getUserById } from "../../data/get_users_sqlite";
 
 export default defineEventHandler((event) => {
   const userId = getRouterParam(event, "id");

@@ -1,10 +1,17 @@
 <script setup lang="ts">
+import { pages } from "~/misc/constants";
 import { useAuthStore } from "~/store/auth_store";
 
 const authStore = useAuthStore();
 const { isAuthorized } = storeToRefs(authStore);
 
 authStore.initFromLocalStorage();
+
+authStore.$subscribe((mutation, state) => {
+  if (isAuthorized.value) {
+    setTimeout(() => navigateTo(pages.SHOPPING_LISTS), 3000);
+  }
+});
 </script>
 <template>
   <v-container>

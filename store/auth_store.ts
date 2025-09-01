@@ -7,8 +7,6 @@ export const useAuthStore = defineStore("auth", () => {
   const user = ref<User>();
 
   async function login(username: string, password: string): Promise<void> {
-    console.log("in login() username=", username, " password=", password);
-
     if (username != null && password != null) {
       user.value = await getUserFromAPI(username);
       if (user.value != undefined) {
@@ -44,7 +42,6 @@ export const useAuthStore = defineStore("auth", () => {
   );
 
   async function getUserFromAPI(username: string): Promise<User | undefined> {
-    console.log("in getUserFromAPI() username=", username);
     let users: User[];
     let result: User | undefined = undefined;
     if (username == null && username == "") {
@@ -52,7 +49,6 @@ export const useAuthStore = defineStore("auth", () => {
     }
     try {
       users = await getUsers();
-      console.log("in getUserFromAPI() getUsers()=", users);
       result = users.find((u) => u.login == username);
     } catch (error) {
       console.log("Error while getting users from server api: ", error);

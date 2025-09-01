@@ -1,8 +1,7 @@
 import type { User } from "~/misc/types";
-import { getUsers } from "../../data/get_users";
+import { getUsers } from "../../data/get_users_sqlite";
 
-const users: User[] = getUsers();
-
-export default defineEventHandler(() => {
+export default defineEventHandler(async () => {
+  const users: User[] = await getUsers();
   return users;
 });

@@ -2,10 +2,10 @@ export type User = {
   id: number;
   login: string;
   name: string;
-  //   email: string;
 };
 
 export type ShoppingItem = {
+  id: number;
   name: string;
   count?: number;
   measure?: string;
@@ -16,4 +16,5 @@ export type ShoppingList = {
   id: number;
   user_id: number;
   items: ShoppingItem[];
+  isCompleted: boolean;
 };

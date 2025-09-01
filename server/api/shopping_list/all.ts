@@ -1,8 +1,7 @@
 import type { ShoppingList } from "~/misc/types";
-import { getShoppingLists } from "~/server/data/get_shopping_lists";
+import { getShoppingLists } from "~/server/data/get_shoplists_sqlite";
 
-const shoppingLists: Array<ShoppingList> = getShoppingLists();
-
-export default defineEventHandler(() => {
+export default defineEventHandler(async () => {
+  const shoppingLists: Array<ShoppingList> = await getShoppingLists();
   return shoppingLists;
 });
