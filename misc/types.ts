@@ -15,6 +15,8 @@ export type ShoppingItem = {
 export type ShoppingList = {
   id: number;
   user_id: number;
+  createdAt: Date;
   items: ShoppingItem[];
   isCompleted: boolean;
+  completedAt?: Date;
 };

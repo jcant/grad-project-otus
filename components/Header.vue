@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount } from "vue";
 import { pages } from "~/misc/constants";
 import { useAuthStore } from "~/store/auth_store";
 
@@ -27,8 +27,8 @@ function goHome() {
 </script>
 
 <template>
-  <v-container>
-    <v-row class="bg-amber">
+  <v-container class="w-100">
+    <v-row class="bg-amber w-100">
       <v-col cols="3" class="text-center">route name: {{ route.name }}</v-col>
       <v-col class="text-center">
         <div v-if="!isAuthorized">
