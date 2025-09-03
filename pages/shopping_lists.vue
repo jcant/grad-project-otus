@@ -1,20 +1,23 @@
 <script setup lang="ts">
 import Header from "~/components/Header.vue";
-import { onBeforeMount } from "vue";
+import ShopList from "~/components/shoplists/ShopList.vue";
 import { useAuthStore } from "~/store/auth_store";
 import type { ShoppingList } from "~/misc/types";
 import { getShoppingListsByUserId } from "~/components/data/api";
-import ShopList from "~/components/shoplists/ShopList.vue";
+import ShopListLabel from "~/components/shoplists/ShopListLabel.vue";
+import { useShopListStore } from "~/store/shoplist_store";
 
 const authStore = useAuthStore();
-const shoppingLists = ref<ShoppingList[] | undefined>();
 const { isAuthorized } = storeToRefs(authStore);
 
+const shopListStore = useShopListStore();
+const shoppingLists = ref<ShoppingList[] | undefined>();
+
 authStore.$subscribe(async (mutation, state) => {
-  console.log("in subscribe: isAuthorized: ", isAuthorized.value);
   if (isAuthorized.value) {
     shoppingLists.value = await getShoppingListsByUserId(authStore.user!.id);
-    console.log("shoplists111: ", shoppingLists.value);
+    if (shoppingLists.value.length > 0)
+      shopListStore.setCurrentShopList(shoppingLists.value[0]!);
   }
 });
 </script>
@@ -24,16 +27,19 @@ authStore.$subscribe(async (mutation, state) => {
       <Header class="mx-auto"></Header>
     </v-row>
     <v-row class="text-center">
-      <v-col cols="4" class="bg-amber text-center">
-        <v-row> USER ACTIVE SHOPLISTS </v-row>
-        <v-row v-for="shopList in shoppingLists"
-          ><ShopList :shop-list="shopList"></ShopList
-        ></v-row>
-        <v-row> USER SHOPLISTS ARCHIVE</v-row>
+      <v-col cols="4" class="text-center">
+        <v-chip color="amber" variant="elevated" class="mb-6 pl-8 pr-8">
+          <div>USER ACTIVE SHOPLISTS</div>
+        </v-chip>
+        <v-row v-for="shopList in shoppingLists">
+          <ShopListLabel :shop-list="shopList"></ShopListLabel>
+        </v-row>
+        <v-chip color="amber" variant="elevated" class="mb-4 mt-6 pl-8 pr-8">
+          USER SHOPLISTS ARCHIVE
+        </v-chip>
       </v-col>
-      <v-col class="bg-amber text-center">
-        <v-row> USER ACTIVE SHOPLISTS </v-row>
-        <v-row> USER SHOPLISTS ARCHIVE</v-row>
+      <v-col class="text-center">
+        <ShopList :shopList="shopListStore.currentShopList!"></ShopList>
       </v-col>
     </v-row>
   </v-container>

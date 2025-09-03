@@ -5,6 +5,7 @@ export function getTestShoppingLists(): ShoppingList[] {
     {
       id: 1,
       user_id: 1,
+      name: "Everyday shopping",
       items: [
         { id: 1, name: "Хлеб", count: 1, measure: "шт.", isBought: false },
         { id: 2, name: "молоко", count: 1, measure: "л.", isBought: false },
@@ -16,6 +17,7 @@ export function getTestShoppingLists(): ShoppingList[] {
     {
       id: 2,
       user_id: 1,
+      name: "Every week shopping",
       items: [
         { id: 4, name: "масло", count: 1, measure: "пачка", isBought: false },
         { id: 5, name: "гречка", count: 1, measure: "кг.", isBought: false },
@@ -27,6 +29,7 @@ export function getTestShoppingLists(): ShoppingList[] {
     {
       id: 3,
       user_id: 1,
+      name: "Shopping list №3",
       items: [
         {
           id: 7,
@@ -50,6 +53,7 @@ export function getTestShoppingLists(): ShoppingList[] {
     {
       id: 4,
       user_id: 2,
+      name: "Best wishes!!!",
       items: [
         { id: 1, name: "Хлеб", count: 1, measure: "шт.", isBought: false },
         { id: 2, name: "молоко", count: 1, measure: "л.", isBought: false },
@@ -61,6 +65,7 @@ export function getTestShoppingLists(): ShoppingList[] {
     {
       id: 5,
       user_id: 2,
+      name: "Cool Friday act.",
       items: [
         { id: 4, name: "масло", count: 1, measure: "пачка", isBought: false },
         { id: 5, name: "гречка", count: 1, measure: "кг.", isBought: false },
@@ -72,6 +77,7 @@ export function getTestShoppingLists(): ShoppingList[] {
     {
       id: 6,
       user_id: 3,
+      name: "Lazy Boss...",
       items: [
         { id: 13, name: "помидоры", count: 2, measure: "кг.", isBought: false },
         { id: 14, name: "морковь", count: 1, measure: "кг.", isBought: false },
@@ -90,6 +96,7 @@ export function getTestShoppingLists(): ShoppingList[] {
     {
       id: 7,
       user_id: 3,
+      name: "Wife's holy shop-items",
       items: [
         { id: 10, name: "мёд", count: 3, measure: "л.", isBought: false },
         {
@@ -113,6 +120,7 @@ export function getTestShoppingLists(): ShoppingList[] {
     {
       id: 8,
       user_id: 4,
+      name: "My favorite yummies",
       items: [
         { id: 13, name: "помидоры", count: 2, measure: "кг.", isBought: false },
         { id: 14, name: "морковь", count: 1, measure: "кг.", isBought: false },
@@ -131,6 +139,7 @@ export function getTestShoppingLists(): ShoppingList[] {
     {
       id: 9,
       user_id: 5,
+      name: "House keeping...",
       items: [
         { id: 13, name: "помидоры", count: 2, measure: "кг.", isBought: false },
         { id: 14, name: "морковь", count: 1, measure: "кг.", isBought: false },
@@ -149,6 +158,7 @@ export function getTestShoppingLists(): ShoppingList[] {
     {
       id: 10,
       user_id: 5,
+      name: "Hunting and Fishing",
       items: [
         { id: 13, name: "помидоры", count: 2, measure: "кг.", isBought: false },
         { id: 14, name: "морковь", count: 1, measure: "кг.", isBought: false },

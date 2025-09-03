@@ -12,4 +12,9 @@ export const pages = {
   USERS: "/users",
 };
 
-export default { serverApi, pages };
+export const config = {
+  INIT_DB_ON_START: false,
+  DEBUG: true,
+};
+
+export default { serverApi, pages, config };

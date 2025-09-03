@@ -24,6 +24,7 @@ export async function getShoppingLists(): Promise<ShoppingList[]> {
     shopLists.push({
       id: Number(list.id),
       user_id: Number(list.user_id),
+      name: String(list.name),
       createdAt: new Date(String(list.created_at)),
       isCompleted: Boolean(list.is_completed),
       items: shopItems,
@@ -59,6 +60,7 @@ export async function getShoppingListById(
     shopList = {
       id: Number(list.rows[0].id),
       user_id: Number(list.rows[0].user_id),
+      name: String(list.rows[0].name),
       isCompleted: Boolean(list.rows[0].is_completed),
       createdAt: new Date(String(list.rows[0].created_at)),
       items: shopItems,
@@ -95,6 +97,7 @@ export async function getShoppingListByUserId(
     shopLists.push({
       id: Number(list.id),
       user_id: Number(list.user_id),
+      name: String(list.name),
       createdAt: new Date(String(list.created_at)),
       isCompleted: Boolean(list.is_completed),
       items: shopItems,
