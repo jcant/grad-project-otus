@@ -15,24 +15,32 @@ export async function getUsers() {
   return users;
 }
 
-export async function getShoppingListsByUserId(userId: Number) {
-  let shopLists: ShoppingList[] = [];
+export async function getShoppingListsByUserId(
+  userId: Number,
+  isCompleted: boolean
+): Promise<ShoppingList[]> {
+  const result: ShoppingList[] = await $fetch(
+    serverApi.GET_SHOPPING_LIST + String(userId),
+    {
+      method: "post",
+      body: { mode: isCompleted },
+      key: Date.now().toString(), // Unique key disables cache reuse
+    }
+  );
 
-  const result = await useFetch(serverApi.GET_SHOPPING_LIST + String(userId), {
-    key: Date.now().toString(), // Unique key disables cache reuse
-  });
-
-  if (result.error.value != undefined) {
-    throw new Error(String(result.error.value));
-  }
-
-  shopLists = <ShoppingList[]>result.data.value;
-  return shopLists;
+  return result;
 }
 
 export async function postShoppingItem(shopItem: ShoppingItem) {
   const result = await $fetch(serverApi.POST_SHOPPING_ITEM, {
     method: "post",
     body: shopItem,
+  });
+}
+
+export async function postShoppingList(shopList: ShoppingList) {
+  const result = await $fetch(serverApi.POST_SHOPPING_LIST, {
+    method: "post",
+    body: shopList,
   });
 }

@@ -1,4 +1,4 @@
-import { ShoppingItem, ShoppingList } from "~/misc/types";
+import { ShoppingItem } from "~/misc/types";
 
 export async function saveShoppingItem(shopItem: ShoppingItem): Promise<void> {
   const db = useDatabase();

@@ -28,6 +28,7 @@ export async function getShoppingLists(): Promise<ShoppingList[]> {
       name: String(list.name),
       createdAt: new Date(String(list.created_at)),
       isCompleted: Boolean(list.is_completed),
+      completedAt: new Date(String(list.completed_at)),
       items: shopItems,
     });
   });
@@ -73,12 +74,15 @@ export async function getShoppingListById(
 }
 
 export async function getShoppingListByUserId(
-  userId: number
+  userId: number,
+  isCompleted: boolean
 ): Promise<ShoppingList[] | undefined> {
   const db = useDatabase();
 
   const lists =
-    await db.sql`SELECT * FROM shop_lists WHERE user_id = ${userId}`;
+    await db.sql`SELECT * FROM shop_lists WHERE user_id = ${userId} and is_completed = ${Number(
+      isCompleted
+    )}`;
 
   let shopLists: ShoppingList[] = [];
 

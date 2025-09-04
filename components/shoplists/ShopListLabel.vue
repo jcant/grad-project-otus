@@ -40,7 +40,7 @@ function selectItem() {
           :model-value="progress"
           :rotate="360"
           :size="50"
-          :width="10"
+          :width="6"
           color="amber"
         >
           {{ progress }}

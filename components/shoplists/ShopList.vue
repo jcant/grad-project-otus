@@ -2,8 +2,21 @@
 import type { ShoppingList } from "~/misc/types";
 import ShopItem from "./ShopItem.vue";
 import { dateToString } from "~/misc/date_utils";
+import { postShoppingList } from "../data/api";
 
 const props = defineProps<{ shopList: ShoppingList }>();
+
+function saveArchiveState() {
+  props.shopList.isCompleted = true;
+  props.shopList.completedAt = new Date();
+  postShoppingList(props.shopList);
+}
+
+function saveActiveState() {
+  props.shopList.isCompleted = false;
+  props.shopList.completedAt = undefined;
+  postShoppingList(props.shopList);
+}
 </script>
 
 <template>
@@ -16,6 +29,22 @@ const props = defineProps<{ shopList: ShoppingList }>();
     <v-card-text>
       <ShopItem v-for="item in shopList?.items" :shopItem="item"></ShopItem>
     </v-card-text>
+    <v-card-actions>
+      <v-btn
+        v-if="!shopList.isCompleted"
+        variant="outlined"
+        @click="saveArchiveState"
+        >Archive List</v-btn
+      >
+      <v-btn
+        v-if="shopList.isCompleted"
+        variant="outlined"
+        @click="saveActiveState"
+        >Get Back Active List</v-btn
+      >
+      <v-btn variant="outlined">Repeat List</v-btn>
+      <v-btn variant="outlined">Create New Empty List</v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
