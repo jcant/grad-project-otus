@@ -15,23 +15,25 @@ async function initDB(): Promise<void> {
   const db = useDatabase();
   await db.sql`DROP TABLE IF EXISTS shop_lists`;
   await db.sql`DROP TABLE IF EXISTS shop_list_items`;
-  await db.sql`CREATE TABLE IF NOT EXISTS shop_lists ("id" INT, "user_id" INT, "name" TEXT, "created_at" TEXT, "is_completed" INT, "completed_at" TEXT)`;
-  await db.sql`CREATE TABLE IF NOT EXISTS shop_list_items ("id" INT, "shop_list_id" INT, "name" TEXT, "count" INT, "measure" TEXT, "is_bought" INT)`;
+  await db.sql`CREATE TABLE IF NOT EXISTS shop_lists ("id" INTEGER PRIMARY KEY, "user_id" INT, "name" TEXT, "created_at" TEXT, "is_completed" INT, "completed_at" TEXT)`;
+  await db.sql`CREATE TABLE IF NOT EXISTS shop_list_items ("id" INTEGER PRIMARY KEY, "shop_list_id" INT, "name" TEXT, "count" INT, "measure" TEXT, "is_bought" INT)`;
 
   const testShopLists: ShoppingList[] = getTestShoppingLists();
 
   testShopLists.forEach(async (testShopList) => {
-    await db.sql`INSERT INTO shop_lists VALUES (${testShopList.id}, ${
-      testShopList.user_id
-    }, ${String(testShopList.name)}, ${String(
-      dateToStringYYYYMMDD(testShopList.createdAt)
-    )}, ${Number(testShopList.isCompleted)}, null)`;
+    await db.sql`INSERT INTO shop_lists(user_id, name, created_at, is_completed) VALUES (
+    ${Number(testShopList.user_id)}, 
+    ${String(testShopList.name)}, 
+    ${String(dateToStringYYYYMMDD(testShopList.createdAt))}, 
+    ${Number(testShopList.isCompleted)})`;
+
     testShopList.items.forEach(async (shopItem) => {
-      await db.sql`INSERT INTO shop_list_items VALUES (${shopItem.id}, ${
-        testShopList.id
-      }, ${shopItem.name}, ${shopItem.count}, ${shopItem.measure}, ${Number(
-        shopItem.isBought
-      )})`;
+      await db.sql`INSERT INTO shop_list_items(shop_list_id, name, count, measure, is_bought) VALUES (
+      ${Number(testShopList.id)}, 
+      ${String(shopItem.name)}, 
+      ${Number(shopItem.count)}, 
+      ${String(shopItem.measure)}, 
+      ${Number(shopItem.isBought)})`;
     });
   });
 }

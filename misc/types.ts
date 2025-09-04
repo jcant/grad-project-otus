@@ -6,6 +6,7 @@ export type User = {
 
 export type ShoppingItem = {
   id: number;
+  shop_list_id: number;
   name: string;
   count?: number;
   measure?: string;

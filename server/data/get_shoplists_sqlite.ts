@@ -14,6 +14,7 @@ export async function getShoppingLists(): Promise<ShoppingList[]> {
     items.rows?.forEach((item) =>
       shopItems.push({
         id: Number(item.id),
+        shop_list_id: Number(item.shop_list_id),
         name: String(item.name),
         count: Number(item.count),
         measure: String(item.measure),
@@ -50,6 +51,7 @@ export async function getShoppingListById(
     items.rows?.forEach((item) =>
       shopItems.push({
         id: Number(item.id),
+        shop_list_id: Number(item.shop_list_id),
         name: String(item.name),
         count: Number(item.count),
         measure: String(item.measure),
@@ -87,6 +89,7 @@ export async function getShoppingListByUserId(
     items.rows?.forEach((item) =>
       shopItems.push({
         id: Number(item.id),
+        shop_list_id: Number(item.shop_list_id),
         name: String(item.name),
         count: Number(item.count),
         measure: String(item.measure),

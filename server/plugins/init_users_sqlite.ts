@@ -14,11 +14,11 @@ async function initDB(): Promise<void> {
   const db = useDatabase();
 
   await db.sql`DROP TABLE IF EXISTS users`;
-  await db.sql`CREATE TABLE IF NOT EXISTS users ("id" INT, "login" TEXT, "name" TEXT)`;
+  await db.sql`CREATE TABLE IF NOT EXISTS users ("id" INTEGER PRIMARY KEY, "login" TEXT, "name" TEXT)`;
 
   const testUsers: User[] = getTestUsers();
 
   testUsers.forEach(async (testUser) => {
-    await db.sql`INSERT INTO users VALUES (${testUser.id}, ${testUser.login}, ${testUser.name})`;
+    await db.sql`INSERT INTO users(login, name) VALUES (${testUser.login}, ${testUser.name})`;
   });
 }

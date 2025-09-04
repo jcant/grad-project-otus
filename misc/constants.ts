@@ -3,7 +3,7 @@ export const serverApi = {
   GET_USER: "/api/user/",
   GET_ALL_SHOPPING_LISTS: "/api/shopping_list/all",
   GET_SHOPPING_LIST: "/api/shopping_list/",
-  TEST: "/api/test",
+  POST_SHOPPING_ITEM: "/api/shopping_list/shop_item_post",
 };
 
 export const pages = {
@@ -13,7 +13,7 @@ export const pages = {
 };
 
 export const config = {
-  INIT_DB_ON_START: false,
+  INIT_DB_ON_START: true,
   DEBUG: true,
 };
 

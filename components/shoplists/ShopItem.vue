@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import type { ShoppingItem } from "~/misc/types";
+import { postShoppingItem } from "../data/api";
 const props = defineProps<{ shopItem: ShoppingItem }>();
 const checkedClass: String = "text-decoration-line-through text-disabled";
+
+function saveState() {
+  postShoppingItem(props.shopItem);
+}
 </script>
 
 <template>
@@ -18,6 +23,7 @@ const checkedClass: String = "text-decoration-line-through text-disabled";
         label="got"
         hide-details
         v-model="shopItem.isBought"
+        @change="saveState"
       ></v-checkbox>
     </v-col>
   </v-row>

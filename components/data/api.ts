@@ -1,5 +1,5 @@
 import { serverApi } from "~/misc/constants";
-import type { ShoppingList, User } from "~/misc/types";
+import type { ShoppingItem, ShoppingList, User } from "~/misc/types";
 
 export async function getUsers() {
   let users: User[] = [];
@@ -28,4 +28,11 @@ export async function getShoppingListsByUserId(userId: Number) {
 
   shopLists = <ShoppingList[]>result.data.value;
   return shopLists;
+}
+
+export async function postShoppingItem(shopItem: ShoppingItem) {
+  const result = await $fetch(serverApi.POST_SHOPPING_ITEM, {
+    method: "post",
+    body: shopItem,
+  });
 }
