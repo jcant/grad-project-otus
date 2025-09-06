@@ -3,19 +3,23 @@ import type { ShoppingList } from "~/misc/types";
 import ShopItem from "./ShopItem.vue";
 import { dateToString } from "~/misc/date_utils";
 import { postShoppingList } from "../data/api";
+import { useShopListStore } from "~/store/shoplist_store";
 
 const props = defineProps<{ shopList: ShoppingList }>();
+const shopListStore = useShopListStore();
 
 function saveArchiveState() {
   props.shopList.isCompleted = true;
   props.shopList.completedAt = new Date();
   postShoppingList(props.shopList);
+  shopListStore.refreshShopLists();
 }
 
 function saveActiveState() {
   props.shopList.isCompleted = false;
   props.shopList.completedAt = undefined;
   postShoppingList(props.shopList);
+  shopListStore.refreshShopLists();
 }
 </script>
 

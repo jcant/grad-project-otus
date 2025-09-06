@@ -2,8 +2,6 @@
 import Header from "~/components/Header.vue";
 import ShopList from "~/components/shoplists/ShopList.vue";
 import { useAuthStore } from "~/store/auth_store";
-import type { ShoppingList } from "~/misc/types";
-import { getShoppingListsByUserId } from "~/components/data/api";
 import ShopListLabel from "~/components/shoplists/ShopListLabel.vue";
 import { useShopListStore } from "~/store/shoplist_store";
 
@@ -11,25 +9,13 @@ const authStore = useAuthStore();
 const { isAuthorized } = storeToRefs(authStore);
 
 const shopListStore = useShopListStore();
-const shopLists = ref<ShoppingList[]>();
-const archiveShopLists = ref<ShoppingList[]>();
+const { activeShopLists, shopListsInArchive } = storeToRefs(shopListStore);
 
 authStore.$subscribe(async (mutation, state) => {
   if (isAuthorized.value) {
-    getShoppingLists();
+    shopListStore.refreshShopLists();
   }
 });
-
-async function getShoppingLists() {
-  shopLists.value = await getShoppingListsByUserId(authStore.user!.id, false);
-  archiveShopLists.value = await getShoppingListsByUserId(
-    authStore.user!.id,
-    true
-  );
-  if (shopLists.value.length > 0) {
-    shopListStore.setCurrentShopList(shopLists.value[0]!);
-  }
-}
 </script>
 <template>
   <v-container>
@@ -42,8 +28,8 @@ async function getShoppingLists() {
           <div>USER ACTIVE SHOPLISTS</div>
         </v-chip>
         <v-row
-          v-for="shopList in shopLists"
-          v-if="shopLists?.length != undefined"
+          v-for="shopList in activeShopLists"
+          v-if="activeShopLists?.length != undefined"
         >
           <ShopListLabel :shop-list="shopList"></ShopListLabel>
         </v-row>
@@ -51,8 +37,8 @@ async function getShoppingLists() {
           USER SHOPLISTS ARCHIVE
         </v-chip>
         <v-row
-          v-for="shopList in archiveShopLists"
-          v-if="archiveShopLists?.length != undefined"
+          v-for="shopList in shopListsInArchive"
+          v-if="shopListsInArchive?.length != undefined"
         >
           <ShopListLabel :shop-list="shopList"></ShopListLabel>
         </v-row>
