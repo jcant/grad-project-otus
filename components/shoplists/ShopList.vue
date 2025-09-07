@@ -4,6 +4,7 @@ import ShopItem from "./ShopItem.vue";
 import { dateToString } from "~/misc/date_utils";
 import { postShoppingList } from "../data/api";
 import { useShopListStore } from "~/store/shoplist_store";
+import { pages } from "~/misc/constants";
 
 const props = defineProps<{ shopList: ShoppingList }>();
 const shopListStore = useShopListStore();
@@ -21,13 +22,21 @@ function saveActiveState() {
   postShoppingList(props.shopList);
   shopListStore.refreshShopLists();
 }
+
+function goToNewShopList() {
+  navigateTo(pages.NEW_SHOPPING_LIST + "/new");
+}
+
+function goToRepeatShopList() {
+  navigateTo(pages.NEW_SHOPPING_LIST + "/repeat");
+}
 </script>
 
 <template>
   <v-card
     :title="String(shopList?.name)"
     :subtitle="
-      String(`created: ${dateToString(new Date(shopList?.createdAt))}`)
+      String(`created: ${dateToString(new Date(shopList.createdAt!))}`)
     "
   >
     <v-card-text>
@@ -46,8 +55,10 @@ function saveActiveState() {
         @click="saveActiveState"
         >Get Back Active List</v-btn
       >
-      <v-btn variant="outlined">Repeat List</v-btn>
-      <v-btn variant="outlined">Create New Empty List</v-btn>
+      <v-btn variant="outlined" @click="goToRepeatShopList">Repeat List</v-btn>
+      <v-btn variant="outlined" @click="goToNewShopList"
+        >Create New Empty List</v-btn
+      >
     </v-card-actions>
   </v-card>
 </template>

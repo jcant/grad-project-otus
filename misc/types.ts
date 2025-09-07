@@ -5,20 +5,20 @@ export type User = {
 };
 
 export type ShoppingItem = {
-  id: number;
-  shop_list_id: number;
+  id?: number;
+  shop_list_id?: number;
   name: string;
   count?: number;
   measure?: string;
-  isBought: boolean;
+  isBought?: boolean;
 };
 
 export type ShoppingList = {
-  id: number;
-  user_id: number;
-  name: String;
-  createdAt: Date;
-  items: ShoppingItem[];
-  isCompleted: boolean;
+  id?: number;
+  user_id?: number;
+  name?: String;
+  createdAt?: Date;
+  items?: ShoppingItem[];
+  isCompleted?: boolean;
   completedAt?: Date;
 };

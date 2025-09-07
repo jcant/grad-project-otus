@@ -38,9 +38,12 @@ export async function postShoppingItem(shopItem: ShoppingItem) {
   });
 }
 
-export async function postShoppingList(shopList: ShoppingList) {
+export async function postShoppingList(
+  shopList: ShoppingList
+): Promise<number> {
   const result = await $fetch(serverApi.POST_SHOPPING_LIST, {
     method: "post",
     body: shopList,
   });
+  return Number(result);
 }

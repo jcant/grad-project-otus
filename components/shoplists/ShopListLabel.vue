@@ -9,11 +9,17 @@ const isSelected = computed(
   () => props.shopList.id == shopListStore.currentShopList?.id
 );
 const progress = computed(() => {
-  const countItems = props.shopList.items.length;
-  const countBoughtItems = props.shopList.items.filter(
+  if (props.shopList.items?.length == 0) {
+    return 0;
+  }
+  const countItems = props.shopList.items!.length;
+  const countBoughtItems = props.shopList.items!.filter(
     (item) => item.isBought
   ).length;
-  return Math.round(100 * (countBoughtItems / countItems));
+
+  const result = Math.round(100 * (countBoughtItems / countItems));
+
+  return result;
 });
 
 function selectItem() {
@@ -32,7 +38,7 @@ function selectItem() {
           :color="isSelected ? 'yellow-lighten-3' : ''"
         >
           <div>{{ shopList.name }}</div>
-          <div>{{ dateToString(new Date(shopList.createdAt)) }}</div>
+          <div>{{ dateToString(new Date(shopList.createdAt!)) }}</div>
         </v-sheet>
       </v-col>
       <v-col>
