@@ -1,4 +1,4 @@
-import constants from "~/misc/constants";
+import { config } from "~/misc/constants";
 import { dateToStringYYYYMMDD } from "~/misc/date_utils";
 import { ShoppingList } from "~/misc/types";
 
@@ -7,7 +7,9 @@ export async function saveShoppingList(
 ): Promise<Number> {
   const db = useDatabase();
 
-  // console.log("SERVER: ", shopList);
+  if (config.DEBUG) {
+    console.log("SERVER: ", shopList);
+  }
 
   //USE SQLite UPSERT functionality...
   //("id" INTEGER PRIMARY KEY, "user_id" INT, "name" TEXT, "created_at" TEXT, "is_completed" INT, "completed_at" TEXT)
@@ -49,7 +51,7 @@ export async function saveShoppingList(
       : ""
   }
   ${
-    shopList.isCompleted
+    shopList.isCompleted != undefined
       ? `is_completed = ${Number(shopList.isCompleted)}, `
       : ""
   }
@@ -70,16 +72,16 @@ export async function saveShoppingList(
 
   await db.exec(query);
 
-  // if (constants.config.DEBUG) {
-  //   console.log("SERVER: ", query);
-  // }
+  if (config.DEBUG) {
+    console.log("SERVER: ", query);
+  }
 
   let res = await db.sql`SELECT last_insert_rowid() as lastId`;
   const lastId = Number(res.rows![0].lastId);
 
-  // if (constants.config.DEBUG) {
-  //   console.log("SERVER: ", lastId);
-  // }
+  if (config.DEBUG) {
+    console.log("SERVER: ", lastId);
+  }
 
   return lastId;
 }

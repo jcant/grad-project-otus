@@ -1,5 +1,4 @@
 import { User } from "~/misc/types";
-import { getTestUsers } from "~/misc/test_users";
 
 export async function getUsers(): Promise<User[]> {
   const db = useDatabase();

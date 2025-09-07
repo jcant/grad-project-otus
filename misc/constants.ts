@@ -16,7 +16,7 @@ export const pages = {
 
 export const config = {
   INIT_DB_ON_START: true,
-  DEBUG: true,
+  DEBUG: false,
 };
 
 export default { serverApi, pages, config };

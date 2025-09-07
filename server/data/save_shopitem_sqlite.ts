@@ -1,10 +1,12 @@
-import constants from "~/misc/constants";
+import { config } from "~/misc/constants";
 import { ShoppingItem } from "~/misc/types";
 
 export async function saveShoppingItem(shopItem: ShoppingItem): Promise<void> {
   const db = useDatabase();
 
-  // console.log("SERVER: ", shopItem);
+  if (config.DEBUG) {
+    console.log("SERVER: ", shopItem);
+  }
 
   //USE SQLite UPSERT functionality...
 
@@ -47,9 +49,9 @@ export async function saveShoppingItem(shopItem: ShoppingItem): Promise<void> {
   const query =
     query_start + query_mid1 + query_mid2 + query_mid3 + query_mid4 + query_end;
 
-  // if (constants.config.DEBUG) {
-  //   console.log("SERVER: ", query);
-  // }
+  if (config.DEBUG) {
+    console.log("SERVER: ", query);
+  }
 
   await db.exec(query);
 }

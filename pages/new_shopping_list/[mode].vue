@@ -25,6 +25,7 @@ authStore.$subscribe(async (mutation, state) => {
     } else {
       newList = shopListStore.currentShopList!;
       newList.id = undefined;
+      newList.isCompleted = false;
       newList.items?.forEach((item) => {
         item.id = undefined;
         item.isBought = false;

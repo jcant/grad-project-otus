@@ -1,6 +1,4 @@
 <script setup lang="ts">
-//import type { User } from "../misc/types";
-
 import { serverApi } from "~/misc/constants";
 
 const users = ref({});

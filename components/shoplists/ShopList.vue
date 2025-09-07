@@ -40,7 +40,11 @@ function goToRepeatShopList() {
     "
   >
     <v-card-text>
-      <ShopItem v-for="item in shopList?.items" :shopItem="item"></ShopItem>
+      <ShopItem
+        v-for="item in shopList?.items"
+        :shopItem="item"
+        :shopListInArchive="shopList.isCompleted!"
+      ></ShopItem>
     </v-card-text>
     <v-card-actions>
       <v-btn

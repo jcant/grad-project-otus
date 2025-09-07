@@ -8,7 +8,6 @@ const showPassword = ref(false);
 const rules = {
   required: (value: string) => !!value || "The field id required!",
   min: (value: string) => value.length >= 8 || "Min 8 characters",
-  // emailMatch: () => `The email and password you entered don't match`,
 };
 </script>
 <template>

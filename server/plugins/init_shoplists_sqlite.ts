@@ -24,10 +24,10 @@ async function initDB(): Promise<void> {
     await db.sql`INSERT INTO shop_lists(user_id, name, created_at, is_completed) VALUES (
     ${Number(testShopList.user_id)}, 
     ${String(testShopList.name)}, 
-    ${String(dateToStringYYYYMMDD(testShopList.createdAt))}, 
+    ${String(dateToStringYYYYMMDD(new Date(testShopList.createdAt!)))}, 
     ${Number(testShopList.isCompleted)})`;
 
-    testShopList.items.forEach(async (shopItem) => {
+    testShopList.items!.forEach(async (shopItem) => {
       await db.sql`INSERT INTO shop_list_items(shop_list_id, name, count, measure, is_bought) VALUES (
       ${Number(testShopList.id)}, 
       ${String(shopItem.name)}, 

@@ -5,11 +5,6 @@ import "vuetify/styles";
 import { createVuetify } from "vuetify";
 
 export default defineNuxtPlugin((app) => {
-  const vuetify = createVuetify({
-    // icons: {
-    //   defaultSet: "mdi",
-    //   // sets: ["mdi", "fa"],
-    // },
-  });
+  const vuetify = createVuetify({});
   app.vueApp.use(vuetify);
 });

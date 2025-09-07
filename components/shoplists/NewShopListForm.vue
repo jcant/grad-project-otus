@@ -25,7 +25,6 @@ function addNewItem() {
   props.shopList.items = shopItems.value;
 }
 async function saveNewList() {
-  //   console.log("new List: ", props.shopList);
   const newListId = await postShoppingList(props.shopList);
   props.shopList.items?.forEach(async (item) => {
     item.shop_list_id = newListId;
