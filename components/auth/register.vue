@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { useAuthStore } from "~/store/auth_store";
 
-const username = ref("");
+const login = ref("");
+const name = ref("");
 const password = ref("");
 const showPassword = ref(false);
 
@@ -9,6 +11,11 @@ const rules = {
   required: (value: string) => !!value || "The field id required!",
   min: (value: string) => value.length >= 8 || "Min 8 characters",
 };
+
+function register() {
+  const authStore = useAuthStore();
+  authStore.register(login.value, name.value, password.value);
+}
 </script>
 <template>
   <v-container>
@@ -17,9 +24,14 @@ const rules = {
       <v-col cols="6" class="text-center">
         <v-form @submit.prevent>
           <v-text-field
-            v-model="username"
+            v-model="login"
             :rules="[rules.required]"
-            label="Username"
+            label="Login"
+          ></v-text-field>
+          <v-text-field
+            v-model="name"
+            :rules="[rules.required]"
+            label="Name"
           ></v-text-field>
           <v-text-field
             v-model="password"
@@ -32,7 +44,9 @@ const rules = {
             counter
             @click:append="showPassword = !showPassword"
           ></v-text-field>
-          <v-btn class="mt-2" type="submit" block>Register new user</v-btn>
+          <v-btn class="mt-2" type="submit" block @click="register"
+            >Register new user</v-btn
+          >
         </v-form>
       </v-col>
     </v-row>

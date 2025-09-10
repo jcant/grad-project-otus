@@ -45,13 +45,13 @@ export const useShopListStore = defineStore("shop_list", () => {
 
   async function getActiveShopLists() {
     if (isAuthorized) {
-      return await getShoppingListsByUserId(authStore.user!.id, false);
+      return await getShoppingListsByUserId(authStore.user!.id!, false);
     }
   }
 
   async function getShopListsInArchive() {
     if (isAuthorized) {
-      return await getShoppingListsByUserId(authStore.user!.id, true);
+      return await getShoppingListsByUserId(authStore.user!.id!, true);
     }
   }
 

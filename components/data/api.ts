@@ -31,6 +31,13 @@ export async function getShoppingListsByUserId(
   return result;
 }
 
+export async function postUser(user: User) {
+  const result = await $fetch(serverApi.POST_USER, {
+    method: "post",
+    body: user,
+  });
+}
+
 export async function postShoppingItem(shopItem: ShoppingItem) {
   const result = await $fetch(serverApi.POST_SHOPPING_ITEM, {
     method: "post",

@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { useAuthStore } from "~/store/auth_store";
 
-const username = ref("");
+const login = ref("");
 const password = ref("");
 const showPassword = ref(false);
 
@@ -14,13 +14,7 @@ const rules = {
 const authStore = useAuthStore();
 
 async function authenticate() {
-  console.log(
-    "in authenticate() username=",
-    username.value,
-    " password=",
-    password.value
-  );
-  await authStore.login(username.value, password.value);
+  await authStore.login(login.value, password.value);
 }
 </script>
 <template>
@@ -30,9 +24,9 @@ async function authenticate() {
       <v-col cols="6" class="text-center">
         <v-form @submit.prevent>
           <v-text-field
-            v-model="username"
+            v-model="login"
             :rules="[rules.required]"
-            label="Username"
+            label="Login"
           ></v-text-field>
           <v-text-field
             v-model="password"

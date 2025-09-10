@@ -44,10 +44,8 @@ authStore.$subscribe(async (mutation, state) => {
         </v-row>
       </v-col>
       <v-col class="text-center">
-        <ShopList
-          v-if="shopListStore.currentShopList"
-          :shopList="shopListStore.currentShopList"
-        ></ShopList>
+        <ShopList v-if="shopListStore.currentShopList"></ShopList>
+        <ShopListMenu></ShopListMenu>
       </v-col>
     </v-row>
   </v-container>

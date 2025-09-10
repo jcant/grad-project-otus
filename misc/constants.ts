@@ -5,6 +5,7 @@ export const serverApi = {
   GET_SHOPPING_LIST: "/api/shopping_list/",
   POST_SHOPPING_ITEM: "/api/shopping_list/shop_item_post",
   POST_SHOPPING_LIST: "/api/shopping_list/shop_list_post",
+  POST_USER: "/api/user/user_post",
 };
 
 export const pages = {

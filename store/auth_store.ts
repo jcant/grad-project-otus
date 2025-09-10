@@ -1,15 +1,33 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import type { User } from "~/misc/types";
-import { getUsers } from "~/components/data/api";
+import { getUsers, postUser } from "~/components/data/api";
 
 export const useAuthStore = defineStore("auth", () => {
   const user = ref<User>();
 
-  async function login(username: string, password: string): Promise<void> {
-    if (username != null && password != null) {
-      user.value = await getUserFromAPI(username);
+  async function login(login: string, password: string): Promise<void> {
+    if (login != null && password != null) {
+      user.value = await getUserFromAPI(login);
       if (user.value != undefined) {
+        saveToLocalStorage();
+      }
+    }
+  }
+
+  async function register(
+    login: string,
+    name: string,
+    password: string
+  ): Promise<void> {
+    if (login != null && password != null) {
+      let result;
+      result = await getUserFromAPI(login);
+      if (result != undefined) {
+        throw new Error(`User ${login} is already registered!`);
+      } else {
+        saveUserByAPI(login, name);
+        user.value = { login: login, name: name };
         saveToLocalStorage();
       }
     }
@@ -41,15 +59,15 @@ export const useAuthStore = defineStore("auth", () => {
     () => user.value != null || user.value != undefined
   );
 
-  async function getUserFromAPI(username: string): Promise<User | undefined> {
+  async function getUserFromAPI(login: string): Promise<User | undefined> {
     let users: User[];
     let result: User | undefined = undefined;
-    if (username == null && username == "") {
+    if (login == null && login == "") {
       throw new Error("Wrong parameter, username must have a valid value!");
     }
     try {
       users = await getUsers();
-      result = users.find((u) => u.login == username);
+      result = users.find((u) => u.login == login);
     } catch (error) {
       console.log("Error while getting users from server api: ", error);
     }
@@ -57,11 +75,18 @@ export const useAuthStore = defineStore("auth", () => {
     return result;
   }
 
+  async function saveUserByAPI(login: string, name: string) {
+    if (login != null && login != undefined) {
+      postUser({ login: login, name: name });
+    }
+  }
+
   return {
     user,
     isAuthorized,
     login,
     logout,
+    register,
     initFromLocalStorage,
     $reset,
   };

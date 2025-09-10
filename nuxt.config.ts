@@ -24,6 +24,9 @@ export default defineNuxtConfig({
     //...
   ],
   vite: {
+    server: {
+      allowedHosts: ["frontend_web"],
+    },
     vue: {
       template: {
         transformAssetUrls,
