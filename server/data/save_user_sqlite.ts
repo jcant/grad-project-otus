@@ -1,5 +1,6 @@
 import { config } from "~/misc/constants";
 import { User } from "~/misc/types";
+import { createQueryFromObject } from "./get_query_object";
 
 export async function saveUser(user: User): Promise<Number> {
   const db = useDatabase();
@@ -8,29 +9,13 @@ export async function saveUser(user: User): Promise<Number> {
     console.log("SERVER: ", user);
   }
 
-  //USE SQLite UPSERT functionality...
   //CREATE TABLE IF NOT EXISTS users ("id" INTEGER PRIMARY KEY, "login" TEXT, "name" TEXT)`
-  const query_start = "INSERT INTO users(";
-  let query_mid1 = `
-  ${user.id ? "id, " : ""}
-  ${user.login ? "login, " : ""}
-  ${user.name ? "name, " : ""}`;
-  const query_mid2 = ") VALUES(";
-  let query_mid3 = `
-  ${user.id ? `${Number(user.id)}, ` : ""}
-  ${user.login ? `'${String(user.login)}', ` : ""}
-  ${user.name ? `'${String(user.name)}', ` : ""}`;
-  const query_mid4 = ") ON CONFLICT(id) DO UPDATE SET ";
-  let query_end = `
-  ${user.login ? `login = '${String(user.login)}', ` : ""}
-  ${user.name ? `name = '${String(user.name)}', ` : ""}`;
 
-  query_mid1 = query_mid1.substring(0, query_mid1.lastIndexOf(","));
-  query_mid3 = query_mid3.substring(0, query_mid3.lastIndexOf(","));
-  query_end = query_end.substring(0, query_end.lastIndexOf(","));
-
-  const query =
-    query_start + query_mid1 + query_mid2 + query_mid3 + query_mid4 + query_end;
+  const query = createQueryFromObject(
+    "users",
+    ["id", "login", "name"],
+    [user.id, user.login, user.name]
+  );
 
   await db.exec(query);
 
