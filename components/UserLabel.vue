@@ -9,7 +9,9 @@ const props = defineProps<UserLabelProps>();
 </script>
 
 <template>
-  <v-chip class="cursor-pointer">{{ user.name }}</v-chip>
+  <v-chip class="pa-4 ma-2"
+    >Login: <b>{{ user.login }}</b> &nbsp;| Name: {{ user.name }}</v-chip
+  >
 </template>
 
 <style scoped></style>

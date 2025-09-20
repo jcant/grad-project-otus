@@ -11,7 +11,7 @@ onBeforeMount(async () => {
 </script>
 <template>
   <div>
-    <div>List of Users</div>
+    <div>Пользователи:</div>
     <div v-for="user in users">
       <UserLabel :user="user"></UserLabel>
     </div>

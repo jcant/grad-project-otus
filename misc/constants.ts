@@ -10,6 +10,7 @@ export const serverApi = {
 
 export const pages = {
   HOME: "/",
+  AUTH: "/auth",
   SHOPPING_LISTS: "/shopping_lists",
   NEW_SHOPPING_LIST: "/new_shopping_list",
   USERS: "/users",
